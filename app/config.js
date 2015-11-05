@@ -13,6 +13,7 @@ var db = Bookshelf.initialize({
   }
 });
 
+
 db.knex.schema.hasTable('urls').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('urls', function (link) {
@@ -43,3 +44,56 @@ db.knex.schema.hasTable('users').then(function(exists) {
 });
 
 module.exports = db;
+
+// MONGO REFACTOR
+// >>>>>>>>>>>>>>>>>>>>>>>>>>
+
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/shortly');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+  var userSchema = new Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    created_at: Date,
+    updated_at: Date
+  });
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+});
