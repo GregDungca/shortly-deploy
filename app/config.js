@@ -30,20 +30,20 @@ db.knex.schema.hasTable('urls').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('users').then(function(exists) {
-  if (!exists) {
-    db.knex.schema.createTable('users', function (user) {
-      user.increments('id').primary();
-      user.string('username', 100).unique();
-      user.string('password', 100);
-      user.timestamps();
-    }).then(function (table) {
-      console.log('Created Table', table);
-    });
-  }
-});
+// db.knex.schema.hasTable('users').then(function(exists) {
+//   if (!exists) {
+//     db.knex.schema.createTable('users', function (user) {
+//       user.increments('id').primary();
+//       user.string('username', 100).unique();
+//       user.string('password', 100);
+//       user.timestamps();
+//     }).then(function (table) {
+//       console.log('Created Table', table);
+//     });
+//   }
+// });
 
-module.exports = db;
+
 
 // MONGO REFACTOR
 // >>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -52,48 +52,11 @@ var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/shortly');
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function (callback) {
-  var userSchema = new Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    created_at: Date,
-    updated_at: Date
-  });
-}
+var mongooseDB = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function (callback) {
+
+// });
   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-});
+module.exports = db;
